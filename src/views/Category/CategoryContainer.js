@@ -3,9 +3,21 @@ import api from '../../helpers/api';
 import Category from './Category';
 
 class CategoryContainer extends Component {
-  state = {
-    category: null,
-    currentQuestion: 0,
+  constructor(props) {
+    super(props)
+
+    if (!localStorage.getItem('trivia')) {
+      localStorage.setItem('trivia', JSON.stringify({score: 0, mistake: 0}));
+    }
+    const score = JSON.parse(localStorage.getItem('trivia')).score;
+    const mistake = JSON.parse(localStorage.getItem('trivia')).mistake;
+
+    this.state = {
+      category: null,
+      currentQuestion: 0,
+      score: score,
+      mistake: mistake,
+    }
   }
 
   // createRef in order to bring back input value to its parent
@@ -30,6 +42,32 @@ class CategoryContainer extends Component {
     // increment score somewhere and redirect to /
 
     const answer = this.answerInput.current.value;
+
+    if (answer === this.state.category.clues[this.state.currentQuestion].answer) {
+      if (this.state.score + 1 === 10) {
+        console.log(`T'es un winner`);
+      }
+      localStorage.setItem('trivia', JSON.stringify({score: this.state.score + 1, mistake: this.state.mistake}));
+      this.setState({
+        score: this.state.score + 1,
+      });
+    } else {
+      if (this.state.mistake + 1 === 3) {
+        localStorage.setItem('trivia', JSON.stringify({score: 0, mistake: 0}));
+        this.setState({
+          mistake: 0,
+          score: 0
+        });
+      } else {
+        localStorage.setItem('trivia', JSON.stringify({score: this.state.score, mistake: this.state.mistake + 1}));
+        this.setState({
+          mistake: this.state.mistake + 1,
+        });
+      }
+    }
+    this.setState({
+      currentQuestion: this.state.currentQuestion + 1,
+    });
     // check if answer is equal to the requested answer from the current question
   }
 
