@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Score from '../../components/Score/ScoreContainer';
 
 const Home = ({ categories }) => (
   <section>
+    <Score />
     <h1>Homepage</h1>
     {categories.length > 0 && (
       <section>
