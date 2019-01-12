@@ -7,6 +7,10 @@ class CategoryContainer extends Component {
   constructor(props) {
     super(props)
 
+    if (!localStorage.getItem('jService')) {
+      localStorage.setItem('jService', JSON.stringify({cateId: []}));
+    }
+
     if (!localStorage.getItem('trivia')) {
       localStorage.setItem('trivia', JSON.stringify({score: 0, mistake: 0, attempt: 0}));
     }
@@ -36,13 +40,7 @@ class CategoryContainer extends Component {
   }
 
   handleSubmit = (e) => {
-    // here I prevent the default bh of submitting form
     e.preventDefault();
-    // write logic to handle good/bad answer
-    // increment currentQuestion
-    // save in the storage the id of the question
-    // if no more question, remove category from categories playable
-    // increment score somewhere and redirect to /
 
     const answer = this.answerInput.current.value;
 
@@ -54,7 +52,7 @@ class CategoryContainer extends Component {
     if (answer === this.state.category.clues[this.state.currentQuestion].answer) {
       score++;
       if (score === 10) {
-        console.log(`T'es un winner`);
+        alert(`T'es un winner`);
       }
     } else {
       mistake++;
@@ -71,6 +69,19 @@ class CategoryContainer extends Component {
       mistake: mistake,
       attempt: attempt
     });
+
+    // reset input value after submit
+    this.answerInput.current.value = "";
+
+    if (!this.state.category.clues[this.state.currentQuestion + 1]) {
+      // set the current category to done
+      const newCateId = JSON.parse(localStorage.getItem('jService'));
+      newCateId.cateId.push(this.state.category.id);
+      localStorage.setItem('jService', JSON.stringify({cateId: newCateId.cateId}))
+
+      // redirect to homepage
+      window.location.replace('/')
+    }
   }
 
   render() {
@@ -78,6 +89,8 @@ class CategoryContainer extends Component {
     // at first render, category will be null so we need to wait
     // before using data.
     if (!category) return <div>is loading</div>
+
+    console.log(category.clues[currentQuestion].answer)
 
     return (
       <div>

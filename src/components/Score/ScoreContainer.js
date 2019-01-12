@@ -26,6 +26,7 @@ class ScoreContainer extends Component {
             attempt: 0
         })
         localStorage.setItem('trivia', JSON.stringify({score: 0, mistake: 0, attempt: 0}));
+        localStorage.setItem('jService', JSON.stringify({cateId: []}));
     }
 
     render() {
