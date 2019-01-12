@@ -60,6 +60,7 @@ class CategoryContainer extends Component {
         score = 0;
         mistake = 0;
         attempt = 0;
+        alert(`T'es pas très fort`);
       }
     }
     localStorage.setItem('trivia', JSON.stringify({score: score, mistake: mistake, attempt: attempt}));
@@ -90,7 +91,7 @@ class CategoryContainer extends Component {
     // before using data.
     if (!category) return <div>is loading</div>
 
-    console.log(category.clues[currentQuestion].answer)
+    console.log(`Cadeau si tu veux test de bien répondre: ${category.clues[currentQuestion].answer}`)
 
     return (
       <div>

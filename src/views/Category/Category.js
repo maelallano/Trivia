@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import './Category.css';
+import Input from '@material-ui/core/Input';
+import { Link } from 'react-router-dom';
 
 const Category = ({ category, currentQuestionIndex, handleSubmit, answerInput }) => {
   const currentQuestion = category.clues[currentQuestionIndex];
   return (
     <section>
+      <Button className='btnHomeCate' size={'medium'} variant={'contained'}>
+        <Link to='/'>Home</Link>
+      </Button>
       <form onSubmit={handleSubmit}>
         <h1>You choosed: {category.title}</h1>
         <div className="question">
@@ -13,11 +20,11 @@ const Category = ({ category, currentQuestionIndex, handleSubmit, answerInput })
           </h3>
           <div className="question__answerInput">
             {/* We give the ref below in order check the value */}
-            <input ref={answerInput} />
+            <Input className='inputCate' ref={answerInput} />
           </div>
-          <button className="question__submit" type="submit">
+          <Button size={'small'} variant={'contained'} className="question__submit btnCate" type="submit">
             Next
-          </button>
+          </Button>
         </div>
       </form>
     </section>

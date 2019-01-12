@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Score from './Score';
+import './Score.css';
 
 class ScoreContainer extends Component {
     constructor(props) {

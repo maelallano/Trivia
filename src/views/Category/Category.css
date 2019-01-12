@@ -1,0 +1,24 @@
+.inputCate {
+    margin: 6px 0px 20px 0px;
+    background: rgba(0, 0, 0, .2);
+    border-radius: 5%;
+}
+.inputCate input {
+    color: lightgrey;
+    padding: 10px;
+}
+
+.question {
+    margin-top: 40px;
+}
+
+.btnHomeCate {
+    background: white;
+    position: absolute !important;
+    right: 40px;
+    top: 20px;
+}
+
+.btnHomeCate a {
+    color: black;
+}

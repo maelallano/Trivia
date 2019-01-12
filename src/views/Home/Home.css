@@ -1,0 +1,33 @@
+.homepageSection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.categoriesContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 400px;
+    height: 800px;
+    overflow: auto;
+    border: 1px solid grey;
+    border-radius: 2%;
+}
+
+.categoryLink {
+    margin: 5px 0px;
+    padding: 5px 0px;
+    width: 200px;
+    transition: ease-in-out 0.1s;
+    border-radius: 2%;
+}
+.categoryLink:hover {
+    color: black;
+    background: grey;
+}
+
+.disabled {
+    color: red;
+    pointer-events: none;
+}
